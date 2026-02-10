@@ -100,25 +100,6 @@ header {
     gap: 1.5rem;
 }
 
-.btn-prayer-header {
-    background-color: var(--accent);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-btn);
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.2);
-}
-
-.btn-prayer-header:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
-}
-
 .burger-btn {
     font-size: 1.8rem;
     color: var(--primary);
@@ -412,7 +393,7 @@ h2::after {
 
 .contact-value-row span {
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     word-break: break-word;
     max-width: 100%;
 }
@@ -529,20 +510,6 @@ footer {
         letter-spacing: 0;
     }
 
-    .btn-prayer-header {
-        padding: 0.4rem 0.7rem;
-        font-size: 0.7rem;
-        gap: 3px;
-    }
-
-    .btn-prayer-header span {
-        display: inline;
-    }
-
-    .btn-prayer-header i {
-        font-size: 1rem;
-    }
-
     main {
         padding: 2rem 1rem;
     }
@@ -606,7 +573,7 @@ footer {
     }
 
     .contact-value-row span {
-        font-size: 1rem;
+        font-size: 1.15rem;
     }
 
     .contact-value-row {
@@ -638,11 +605,6 @@ footer {
 @media (max-width: 480px) {
     .brand {
         font-size: 0.75rem;
-    }
-
-    .btn-prayer-header {
-        padding: 0.35rem 0.5rem;
-        font-size: 0.65rem;
     }
 
     h2 {
@@ -680,7 +642,7 @@ footer {
     }
 
     .contact-value-row span {
-        font-size: 0.85rem;
+        font-size: 1rem;
     }
 
     .nav-list {
