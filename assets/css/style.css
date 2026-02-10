@@ -588,22 +588,18 @@ footer {
     }
 
     /* Champs bancaires responsive */
-    .field-container {
-        flex-direction: column;
-    }
-
     .field-container input {
-        padding: 0.8rem 1rem;
+        padding: 0.8rem 0.8rem;
         font-size: 0.9rem;
     }
 
-    /* Boutons copier en dessous sur mobile */
+    /* Boutons copier compacts à droite sur mobile */
     .btn-copy {
-        padding: 0.7rem;
-        border-left: none;
-        border-top: 1px solid var(--border-color);
-        justify-content: center;
-        font-size: 0.85rem;
+        padding: 0.8rem 0.9rem;
+        font-size: 0.75rem;
+        gap: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     /* Grille des boutons en 1 colonne sur mobile */
@@ -689,6 +685,21 @@ footer {
 
     .card-panel {
         padding: 1.2rem;
+    }
+
+    /* Boutons copier très compacts - icône uniquement */
+    .btn-copy {
+        padding: 0.8rem;
+        font-size: 0; /* Cache le texte */
+    }
+
+    .btn-copy i {
+        font-size: 1.1rem; /* Affiche l'icône */
+    }
+
+    .field-container input {
+        padding: 0.8rem 0.7rem;
+        font-size: 0.85rem;
     }
 
     .btn-download-rib {
