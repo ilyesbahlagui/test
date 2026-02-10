@@ -206,7 +206,7 @@
         .nav-list {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 1.5rem;
             font-size: 1.6rem;
             font-weight: 600;
             text-align: center;
@@ -382,6 +382,9 @@
             font-size: 1rem;
             transition: 0.3s;
             box-shadow: var(--shadow-soft);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .btn-accent-outline:hover {
@@ -548,6 +551,173 @@
 
         #toast i {
             font-size: 1.2rem;
+        }
+
+        /* ============================================================
+           7. MEDIA QUERIES - RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* Header responsive */
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            .brand {
+                font-size: 1rem;
+            }
+
+            /* Bouton prière plus compact sur mobile */
+            .btn-prayer-header {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+                gap: 5px;
+            }
+
+            .btn-prayer-header span {
+                display: none;
+            }
+
+            .btn-prayer-header i {
+                font-size: 1.2rem;
+            }
+
+            /* Main content */
+            main {
+                padding: 2rem 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .card-panel {
+                padding: 1.5rem;
+            }
+
+            /* Champs bancaires responsive */
+            .field-container {
+                flex-direction: column;
+            }
+
+            .field-container input {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            /* Boutons copier en dessous sur mobile */
+            .btn-copy {
+                padding: 0.7rem;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                justify-content: center;
+                font-size: 0.85rem;
+            }
+
+            /* Grille des boutons en 1 colonne sur mobile */
+            .grid-buttons {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 3rem;
+            }
+
+            .btn-accent-outline {
+                padding: 0.9rem 0.7rem;
+                font-size: 0.9rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .btn-accent-outline i {
+                font-size: 1.1rem;
+            }
+
+            /* Menu navigation plus compact */
+            .nav-list {
+                gap: 1.2rem;
+                font-size: 1.3rem;
+            }
+
+            .nav-list i {
+                font-size: 1.5rem;
+            }
+
+            /* Contact */
+            .contact-list li {
+                font-size: 0.9rem;
+            }
+
+            .contact-value-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 2rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            /* Scroll button */
+            .scroll-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            /* Toast */
+            #toast {
+                min-width: 200px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand {
+                font-size: 0.9rem;
+            }
+
+            .btn-prayer-header {
+                padding: 0.4rem 0.7rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .card-panel {
+                padding: 1.2rem;
+            }
+
+            .btn-download-rib {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .btn-accent-outline {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.85rem;
+                gap: 0.4rem;
+            }
+
+            .contact-value-row span {
+                font-size: 0.85rem;
+            }
+
+            /* Menu encore plus compact sur très petits écrans */
+            .nav-list {
+                gap: 1rem;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
