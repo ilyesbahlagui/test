@@ -263,33 +263,40 @@ h2 i {
 
 .field-value {
     width: 100%;
-    padding: 0.85rem 1.1rem;
-    min-height: 3.3rem;
+    padding: 0.65rem 0.95rem;
+    min-height: 2.6rem;
     font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--text-main);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.25;
     overflow-wrap: anywhere;
     display: flex;
     align-items: center;
 }
 
 .btn-copy {
-    padding: 0 0.95rem;
+    padding: 0 0.85rem;
     background: #f3f4f6;
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     border-left: 1px solid var(--border-color);
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    min-height: 3.3rem;
+    min-width: 90px;
+    min-height: 2.6rem;
     gap: 6px;
     white-space: nowrap;
+}
+
+.field-container.copied-blur,
+.field-container.copied-blur:focus-within {
+    border-color: var(--border-color);
+    box-shadow: none;
+    background: #f9fafb;
 }
 
 .btn-copy:focus-visible {

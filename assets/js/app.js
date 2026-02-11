@@ -99,12 +99,18 @@ function copierValeur(id) {
     if (!el) return;
     const text = el.textContent.trim();
     if (!text) return;
-
     const trigger = document.activeElement;
+    const container = el.closest('.field-container');
     navigator.clipboard.writeText(text)
         .then(() => showToast('Copié'))
     .catch(() => showToast('Copié'))
-    .finally(() => clearFocus(trigger));
+    .finally(() => {
+            if (container) {
+                container.classList.add('copied-blur');
+                setTimeout(() => container.classList.remove('copied-blur'), 180);
+            }
+            clearFocus(trigger);
+        });
 }
 
 // Scroll Top Button
