@@ -91,6 +91,12 @@ header {
     letter-spacing: 0.6px;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
 /* Burger + overlay menu */
 .burger-btn {
     font-size: 1.8rem;
@@ -101,6 +107,10 @@ header {
 
 .burger-btn:hover {
     transform: scale(1.1);
+}
+
+.nav-close-icon {
+    color: var(--text-main);
 }
 
 .nav-overlay {
@@ -119,6 +129,7 @@ header {
 
 .nav-overlay.open {
     height: 100vh;
+    height: 100dvh;
 }
 
 .nav-content {
@@ -168,11 +179,10 @@ header {
     font-size: 1.8rem;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
+/* TIMING HELPERS */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.5s; }
 
 /* MAIN CONTENT */
 main {
@@ -297,7 +307,7 @@ h2 i {
 
 .friday-label {
     font-weight: 700;
-    color: var(--text-main);
+    color: var(--primary);
     font-size: 1rem;
 }
 
@@ -360,6 +370,19 @@ h2 i {
     max-width: 320px;
     padding: 0.85rem 1.2rem;
     justify-content: center;
+}
+
+.map-frame {
+    width: 100%;
+    height: 250px;
+    background: #e5e7eb;
+    border-radius: var(--radius-box);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.contact-card {
+    text-align: center;
 }
 
 .btn-download-rib {
@@ -558,7 +581,7 @@ footer {
     }
 
     .brand {
-        font-size: 0.85rem;
+        font-size: 1rem;
         letter-spacing: 0;
     }
 
@@ -646,7 +669,7 @@ footer {
 
 @media (max-width: 480px) {
     .brand {
-        font-size: 0.75rem;
+        font-size: 0.95rem;
     }
 
     h2 {

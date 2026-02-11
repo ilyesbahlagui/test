@@ -5,7 +5,6 @@ const config = {
     },
     horaires: {
         lien: "https://mawaqit.net/fr",
-        texte: "Horaires de Prière",
         vendredi: {
             ete: "14:30",
             hiver: "13:30"

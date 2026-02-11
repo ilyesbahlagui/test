@@ -2,15 +2,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     initData();
     initScrollTop();
+    initAccessibility();
 });
 
+let lastFocusedElement = null;
+
+// Données dynamiques
 function initData() {
     // Header & Footer
     const nom = config.general.nomMosquee;
     document.getElementById('brand-name').textContent = nom;
     document.getElementById('footer-brand').textContent = nom;
     document.title = `${nom} - Dons`;
-    document.getElementById('footer-copy').textContent = `© ${config.general.annee} ${nom}. Tous droits réservés.`;
+    const currentYear = new Date().getFullYear();
+    document.getElementById('footer-copy').textContent = `© ${currentYear} ${nom}. Tous droits réservés.`;
 
     // Banque
     document.getElementById('val-benef').textContent = config.banque.titulaire;
@@ -51,14 +56,26 @@ function initData() {
     const mapHtml = `<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=${encodeURIComponent(config.contact.adresse)}&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>`;
     document.getElementById('map-frame').innerHTML = mapHtml;
 
-    // Meta SEO minimal
-    applySeoTags(nom);
 }
 
 // Menu Burger
 function toggleMenu() {
     const nav = document.getElementById('nav-overlay');
-    nav.classList.toggle('open');
+    const isOpen = nav.classList.contains('open');
+
+    if (!isOpen) {
+        lastFocusedElement = document.activeElement;
+        nav.classList.add('open');
+        nav.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    } else {
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
+    }
 }
 
 // Copier les informations bancaires
@@ -76,13 +93,13 @@ function copierValeur(id) {
 // Scroll Top Button
 function initScrollTop() {
     const btn = document.getElementById("scrollTopBtn");
-    window.onscroll = () => {
+    window.addEventListener('scroll', () => {
         if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
             btn.classList.add("show");
         } else {
             btn.classList.remove("show");
         }
-    };
+    });
 }
 
 function scrollToTop() {
@@ -98,29 +115,13 @@ function showToast(message = 'Copié') {
     setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-function applySeoTags(nom) {
-    const description = `${nom} - Dons, coordonnées et horaires du vendredi.`;
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.name = 'description';
-        document.head.appendChild(metaDesc);
-    }
-    metaDesc.content = description;
-
-    let ogTitle = document.querySelector('meta[property="og:title"]');
-    if (!ogTitle) {
-        ogTitle = document.createElement('meta');
-        ogTitle.setAttribute('property', 'og:title');
-        document.head.appendChild(ogTitle);
-    }
-    ogTitle.content = `${nom} - Portail de dons`;
-
-    let ogDesc = document.querySelector('meta[property="og:description"]');
-    if (!ogDesc) {
-        ogDesc = document.createElement('meta');
-        ogDesc.setAttribute('property', 'og:description');
-        document.head.appendChild(ogDesc);
-    }
-    ogDesc.content = description;
+// Accessibilité overlay (Esc pour fermer)
+function initAccessibility() {
+    document.addEventListener('keydown', (e) => {
+        const nav = document.getElementById('nav-overlay');
+        if (!nav.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+            toggleMenu();
+        }
+    });
 }

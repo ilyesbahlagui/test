@@ -5,7 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail de Don - Grande Mosquée</title>
-    <!-- SEO TODO: compléter title/description, balises og/twitter, données structurées JSON-LD organisation/lieu, et balise canonical -->
+        <!-- SEO: metas de base -->
+        <meta name="description" content="Portail de dons et coordonnées de la Grande Mosquée. Informations bancaires, horaires du vendredi et accès.">
+        <link rel="canonical" href="https://example.com/">
+        <meta property="og:title" content="Portail de Don - Grande Mosquée">
+        <meta property="og:description" content="Portail de dons et coordonnées de la Grande Mosquée. Informations bancaires, horaires du vendredi et accès.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://example.com/">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Portail de Don - Grande Mosquée">
+        <meta name="twitter:description" content="Portail de dons et coordonnées de la Grande Mosquée. Informations bancaires, horaires du vendredi et accès.">
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Place",
+          "name": "Grande Mosquée",
+          "address": "25 Rue du Faubourg Saint-Antoine, 75011 Paris",
+          "url": "https://example.com/",
+          "telephone": "01 43 43 43 43"
+        }
+        </script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -13,20 +33,22 @@
 
 <body>
 
+        <!-- Header -->
     <header>
         <div class="brand" id="brand-name">Nom Mosquée</div>
 
         <div class="header-actions">
-            <button class="burger-btn" onclick="toggleMenu()">
+                <button class="burger-btn" aria-label="Ouvrir le menu" onclick="toggleMenu()">
                 <i class="ri-menu-line"></i>
             </button>
         </div>
     </header>
 
+        <!-- Navigation -->
     <div class="nav-overlay" id="nav-overlay">
         <div class="nav-header">
-            <button class="burger-btn" onclick="toggleMenu()">
-                <i class="ri-close-line" style="color: var(--text-main);"></i>
+                <button class="burger-btn" aria-label="Fermer le menu" onclick="toggleMenu()">
+                    <i class="ri-close-line nav-close-icon"></i>
             </button>
         </div>
         <div class="nav-content">
@@ -38,9 +60,11 @@
         </div>
     </div>
 
+    <!-- Contenu principal -->
     <main>
 
-        <section id="don" class="animate-in" style="animation-delay: 0.1s;">
+            <!-- Bloc dons -->
+        <section id="don" class="animate-in delay-1">
             <h2><i class="ri-bank-card-2-line"></i> Informations Bancaires</h2>
 
             <div class="card-panel">
@@ -81,20 +105,21 @@
                 </button>
             </div>
 
-            <div class="grid-buttons animate-in" style="animation-delay: 0.3s;">
-                <a href="#" id="link-cb" target="_blank" class="btn-accent-outline">
+            <div class="grid-buttons animate-in delay-3">
+                    <a href="#" id="link-cb" target="_blank" rel="noopener noreferrer" class="btn-accent-outline">
                     <i class="ri-bank-card-2-fill"></i> Carte Bancaire
                 </a>
-                <a href="#" id="link-cagnotte" target="_blank" class="btn-accent-outline">
+                    <a href="#" id="link-cagnotte" target="_blank" rel="noopener noreferrer" class="btn-accent-outline">
                     <i class="ri-hand-heart-fill"></i> Cagnotte
                 </a>
             </div>
         </section>
 
-        <section id="horaires-vendredi" class="card-panel prayer-card animate-in" style="animation-delay: 0.2s;">
+            <!-- Bloc horaires -->
+        <section id="horaires-vendredi" class="card-panel prayer-card animate-in delay-2">
             <h2><i class="ri-time-line"></i> Horaires de Prière</h2>
             <div class="friday-header">
-                <div class="friday-label">Vendredi</div>
+                <div class="friday-label">Prière du Vendredi</div>
             </div>
             <div class="friday-grid">
                 <div class="friday-slot">
@@ -113,41 +138,37 @@
                 </div>
             </div>
             <div class="friday-footer">
-                <a id="link-mawaqit" class="btn-accent-outline" target="_blank"><i class="ri-external-link-line"></i> Horaires complets (Mawaqit)</a>
+                    <a id="link-mawaqit" class="btn-accent-outline" target="_blank" rel="noopener noreferrer"><i class="ri-external-link-line"></i> Horaires complets (Mawaqit)</a>
             </div>
         </section>
 
-        <section id="contact" class="animate-in" style="animation-delay: 0.5s;">
+            <!-- Bloc contact -->
+        <section id="contact" class="animate-in delay-3">
             <h2>Contact & Accès</h2>
 
-            <div class="card-panel" style="text-align: center;">
+                <div class="card-panel contact-card">
                 <ul class="contact-list">
                     <li>
                         <div class="contact-icon-circle"><i class="ri-map-pin-fill"></i></div>
-                        <a id="link-adresse" class="contact-link" target="_blank">
+                            <a id="link-adresse" class="contact-link" target="_blank" rel="noopener noreferrer">
                             <span id="txt-adresse">Adresse...</span>
-                            <i class="ri-external-link-line"></i>
                         </a>
                     </li>
                     <li>
                         <div class="contact-icon-circle"><i class="ri-phone-fill"></i></div>
                         <a id="link-tel" class="contact-link">
                             <span id="txt-tel">01...</span>
-                            <i class="ri-phone-line"></i>
                         </a>
                     </li>
                     <li>
                         <div class="contact-icon-circle"><i class="ri-mail-send-fill"></i></div>
                         <a id="link-email" class="contact-link">
                             <span id="txt-email">mail@...</span>
-                            <i class="ri-send-plane-line"></i>
                         </a>
                     </li>
                 </ul>
 
-                <div id="map-frame"
-                    style="width: 100%; height: 250px; background: #e5e7eb; border-radius: var(--radius-box); overflow: hidden; box-shadow: var(--shadow-soft);">
-                </div>
+                    <div id="map-frame" class="map-frame"></div>
             </div>
         </section>
 
