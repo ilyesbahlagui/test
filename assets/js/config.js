@@ -1,29 +1,30 @@
 const config = {
     general: {
-        nomMosquee: "Grande Mosquée de Paris",
+        nomMosquee: "Mosquée de Nîmes",
         annee: "2026"
     },
     horaires: {
-        lien: "https://mawaqit.net/fr",
+        lien: "https://mawaqit.net/fr/nimes",
         vendredi: {
-            ete: "14:30",
-            hiver: "13:30"
+            ete: "14:15",
+            hiver: "13:15"
         }
     },
     banque: {
-        titulaire: "ASSOCIATION GRANDE MOSQUEE DE PARIS",
-        iban: "FR76 1234 5678 9012 3456 7890 123",
-        bic: "AGRIFRPP",
-        ref: "DON-2026",
-        domiciliation: "CREDIT AGRICOLE - PARIS BASTILLE"
+        titulaire: "ASSOCIATION MOSQUEE DE NIMES",
+        iban: "FR76 3000 2000 5000 1234 5678 901",
+        bic: "BNPAFRPP",
+        ref: "DON-NIMES-2026",
+        domiciliation: "BNP PARIBAS - NIMES",
+        ribPdf: "assets/docs/rib.pdf" // Chemin du PDF RIB fourni manuellement
     },
     liens: {
-        cb: "https://stripe.com/donate",
-        cagnotte: "https://www.cotizup.com/mosquee-paris"
+        cb: "https://stripe.com/donate/nimes",
+        cagnotte: "https://www.cotizup.com/mosquee-nimes"
     },
     contact: {
-        adresse: "25 Rue du Faubourg Saint-Antoine, 75011 Paris",
-        email: "contact@mosquee-paris.fr",
-        tel: "01 43 43 43 43"
+        adresse: "12 Rue de la Mosquée, 30000 Nîmes",
+        email: "contact@mosquee-nimes.fr",
+        tel: "04 66 67 68 69"
     }
 };

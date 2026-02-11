@@ -141,3 +141,34 @@ function initAccessibility() {
         }
     });
 }
+
+// Téléchargement direct du RIB statique
+function telechargerRIB() {
+    try {
+        const ribUrl = config?.banque?.ribPdf;
+        if (!ribUrl) {
+            alert('Aucun PDF de RIB n\'est configuré pour le moment.');
+            return;
+        }
+
+        const link = document.createElement('a');
+        link.href = ribUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        const baseName = (config?.general?.nomMosquee || 'mosquee')
+            .normalize('NFD').replace(/\p{Diacritic}/gu, '') // retire les accents
+            .replace(/\s+/g, '-')
+            .replace(/[^a-zA-Z0-9-_]/g, '') || 'mosquee';
+        link.download = `RIB-${baseName}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (typeof showToast === 'function') {
+            showToast('RIB téléchargé');
+        }
+    } catch (error) {
+        console.error('Erreur téléchargement RIB:', error);
+        alert('Erreur lors du téléchargement du RIB. Veuillez réessayer.');
+    }
+}
