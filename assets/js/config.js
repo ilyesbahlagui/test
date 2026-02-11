@@ -21,7 +21,7 @@ const config = {
         cagnotte: "https://www.cotizup.com/mosquee-nimes"
     },
     contact: {
-        adresse: "12 Rue de la Mosquée, 30000 Nîmes",
+        adresse: "Rue de la cavalerie, 30000 Nîmes",
         email: "contact@mosquee-nimes.fr",
         tel: "04 66 67 68 69"
     }
