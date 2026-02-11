@@ -12,32 +12,47 @@ function initData() {
     document.title = `${nom} - Dons`;
     document.getElementById('footer-copy').textContent = `© ${config.general.annee} ${nom}. Tous droits réservés.`;
 
-    // Boutons Prière
-    const btnPriere = document.getElementById('btn-prayer-top');
-    const lblPriere = document.getElementById('lbl-prayer');
-    const menuPriere = document.getElementById('menu-prayer-link');
-    btnPriere.href = config.horaires.lien;
-    menuPriere.href = config.horaires.lien;
-    lblPriere.textContent = config.horaires.texte;
-
     // Banque
-    document.getElementById('val-benef').value = config.banque.titulaire;
-    document.getElementById('val-iban').value = config.banque.iban;
-    document.getElementById('val-bic').value = config.banque.bic;
-    document.getElementById('val-ref').value = config.banque.ref;
+    document.getElementById('val-benef').textContent = config.banque.titulaire;
+    document.getElementById('val-iban').textContent = config.banque.iban;
+    document.getElementById('val-bic').textContent = config.banque.bic;
+    document.getElementById('val-ref').textContent = config.banque.ref;
 
     // Liens externes
     document.getElementById('link-cb').href = config.liens.cb;
     document.getElementById('link-cagnotte').href = config.liens.cagnotte;
 
     // Contact
-    document.getElementById('txt-adresse').textContent = config.contact.adresse;
-    document.getElementById('txt-tel').textContent = config.contact.tel;
-    document.getElementById('txt-email').textContent = config.contact.email;
+    const adresse = config.contact.adresse;
+    const tel = config.contact.tel;
+    const email = config.contact.email;
+
+    document.getElementById('txt-adresse').textContent = adresse;
+    document.getElementById('txt-tel').textContent = tel;
+    document.getElementById('txt-email').textContent = email;
+
+    const adresseLink = document.getElementById('link-adresse');
+    const telLink = document.getElementById('link-tel');
+    const emailLink = document.getElementById('link-email');
+
+    adresseLink.href = `https://maps.google.com/?q=${encodeURIComponent(adresse)}`;
+    telLink.href = `tel:${tel.replace(/\s+/g, '')}`;
+    emailLink.href = `mailto:${email}`;
+
+    // Horaires vendredi
+    document.getElementById('heure-ete').textContent = config.horaires.vendredi.ete;
+    document.getElementById('heure-hiver').textContent = config.horaires.vendredi.hiver;
+    const mawaqitLink = document.getElementById('link-mawaqit');
+    if (mawaqitLink) {
+        mawaqitLink.href = config.horaires.lien;
+    }
 
     // Map
     const mapHtml = `<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=${encodeURIComponent(config.contact.adresse)}&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>`;
     document.getElementById('map-frame').innerHTML = mapHtml;
+
+    // Meta SEO minimal
+    applySeoTags(nom);
 }
 
 // Menu Burger
@@ -46,38 +61,16 @@ function toggleMenu() {
     nav.classList.toggle('open');
 }
 
-// Copier depuis Input
-function copier(id) {
+// Copier les informations bancaires
+function copierValeur(id) {
     const el = document.getElementById(id);
-    el.select(); 
-    el.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(el.value)
-        .then(showToast)
-        .catch(() => { 
-            document.execCommand('copy'); 
-            showToast(); 
-        });
-}
+    if (!el) return;
+    const text = el.textContent.trim();
+    if (!text) return;
 
-// Copier depuis Texte (Contact)
-function copierTexte(id) {
-    const text = document.getElementById(id).textContent;
     navigator.clipboard.writeText(text)
-        .then(showToast)
-        .catch(err => console.error('Erreur copie', err));
-}
-
-function showToast(message = 'Copié avec succès !') {
-    const x = document.getElementById("toast");
-    const icon = x.querySelector('i');
-    const textSpan = x.querySelector('span');
-    
-    if (textSpan) {
-        textSpan.textContent = message;
-    }
-    
-    x.className = "show";
-    setTimeout(() => x.className = x.className.replace("show", ""), 3000);
+        .then(() => showToast('Copié'))
+        .catch(() => showToast('Copié'));
 }
 
 // Scroll Top Button
@@ -94,4 +87,40 @@ function initScrollTop() {
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showToast(message = 'Copié') {
+    const toast = document.getElementById('toast');
+    const text = document.getElementById('toast-text');
+    if (!toast || !text) return;
+    text.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+function applySeoTags(nom) {
+    const description = `${nom} - Dons, coordonnées et horaires du vendredi.`;
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = description;
+
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+    }
+    ogTitle.content = `${nom} - Portail de dons`;
+
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+        ogDesc = document.createElement('meta');
+        ogDesc.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDesc);
+    }
+    ogDesc.content = description;
 }

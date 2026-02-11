@@ -100,7 +100,9 @@ function telechargerRIB() {
     try {
         const doc = genererRIB();
         doc.save(`RIB-${config.general.nomMosquee.replace(/\s+/g, '-')}-${config.general.annee}.pdf`);
-        showToast('RIB téléchargé avec succès !');
+        if (typeof showToast === 'function') {
+            showToast('RIB téléchargé');
+        }
     } catch (error) {
         console.error('Erreur génération PDF:', error);
         alert('Erreur lors de la génération du RIB. Veuillez réessayer.');

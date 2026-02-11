@@ -76,49 +76,22 @@ ul {
 header {
     background: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem 1.5rem;
+    gap: 0.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-soft);
+    padding: 1rem 1.25rem;
 }
 
 .brand {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--primary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 }
 
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.btn-prayer-header {
-    background-color: var(--accent);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-btn);
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.2);
-}
-
-.btn-prayer-header:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
-}
-
+/* Burger + overlay menu */
 .burger-btn {
     font-size: 1.8rem;
     color: var(--primary);
@@ -130,7 +103,6 @@ header {
     transform: scale(1.1);
 }
 
-/* Menu Overlay Full Screen */
 .nav-overlay {
     position: fixed;
     top: 0;
@@ -196,6 +168,12 @@ header {
     font-size: 1.8rem;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
 /* MAIN CONTENT */
 main {
     flex: 1;
@@ -222,6 +200,11 @@ h2::after {
     background: var(--accent);
     margin: 10px auto 0;
     border-radius: 2px;
+}
+
+h2 i {
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 .card-panel {
@@ -266,37 +249,18 @@ h2::after {
     background: #fff;
 }
 
-.field-container input {
-    flex: 1;
+.field-value {
+    width: 100%;
     padding: 0.9rem 1.2rem;
-    border: none;
-    outline: none;
     font-family: var(--font-mono);
     font-size: 1rem;
     color: var(--text-main);
-    background: transparent;
-    font-weight: 500;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    min-width: 0;
-}
-
-.field-container input::-webkit-scrollbar {
-    height: 6px;
-}
-
-.field-container input::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 3px;
-}
-
-.field-container input::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    font-weight: 600;
+    overflow-wrap: anywhere;
 }
 
 .btn-copy {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     background: #f3f4f6;
     color: var(--text-muted);
     font-weight: 600;
@@ -306,11 +270,96 @@ h2::after {
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
 }
 
 .btn-copy:hover {
     background: var(--primary);
     color: white;
+}
+
+.prayer-card {
+    background: linear-gradient(135deg, #f5fbf5, #fffdf6);
+    border: 1px solid #e8f3ea;
+}
+
+.prayer-card h2 {
+    margin-bottom: 1.5rem;
+}
+
+.friday-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.friday-label {
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+.friday-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.2rem;
+}
+
+.friday-slot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1.1rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 10px 20px -12px rgba(0,0,0,0.15);
+}
+
+.friday-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 16px -10px rgba(0,0,0,0.3);
+}
+
+.friday-icon.sun {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.friday-icon.winter {
+    background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+}
+
+.slot-label {
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.slot-time {
+    color: var(--text-muted);
+}
+
+.friday-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.2rem;
+}
+
+.friday-footer .btn-accent-outline {
+    width: auto;
+    min-width: 220px;
+    max-width: 320px;
+    padding: 0.85rem 1.2rem;
+    justify-content: center;
 }
 
 .btn-download-rib {
@@ -402,41 +451,34 @@ h2::after {
     font-size: 1.2rem;
 }
 
-.contact-value-row {
-    display: flex;
+.contact-link {
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
+    color: var(--text-main);
+    background: #f9fafb;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-btn);
+    box-shadow: var(--shadow-soft);
+    font-weight: 600;
 }
 
-.contact-value-row span {
-    font-weight: 500;
-    font-size: 1.1rem;
-    word-break: break-word;
-    max-width: 100%;
-}
-
-.btn-copy-small {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+.contact-link:hover {
     background: var(--primary-light);
     color: var(--primary);
-    border-radius: 4px;
-    flex-shrink: 0;
-    white-space: nowrap;
 }
 
-.btn-copy-small:hover {
-    background: var(--accent);
-    color: white;
+.contact-link span {
+    word-break: break-word;
 }
 
 
 /* FOOTER & SCROLL TOP */
 footer {
-    background-color: #1f2937;
-    color: #9ca3af;
+    background-color: var(--primary);
+    color: #f1f5f9;
     text-align: center;
     padding: 2rem 1.5rem;
     font-size: 0.9rem;
@@ -445,7 +487,7 @@ footer {
 }
 
 .footer-brand {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
     color: white;
     margin-bottom: 0.5rem;
@@ -483,39 +525,30 @@ footer {
     transform: translateY(-3px);
 }
 
-/* TOAST */
+/* Toast popup */
 #toast {
-    visibility: hidden;
-    min-width: 250px;
-    background-color: var(--primary);
-    color: #fff;
-    text-align: center;
-    border-radius: 50px;
-    padding: 12px 24px;
     position: fixed;
-    z-index: 3000;
     left: 50%;
-    bottom: 30px;
+    bottom: 28px;
     transform: translateX(-50%) translateY(20px);
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
     box-shadow: var(--shadow-hover);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 2500;
     font-weight: 600;
 }
 
 #toast.show {
-    visibility: visible;
     opacity: 1;
-    bottom: 50px;
     transform: translateX(-50%) translateY(0);
-}
-
-#toast i {
-    font-size: 1.2rem;
 }
 
 /* MEDIA QUERIES */
@@ -527,20 +560,6 @@ footer {
     .brand {
         font-size: 0.85rem;
         letter-spacing: 0;
-    }
-
-    .btn-prayer-header {
-        padding: 0.4rem 0.7rem;
-        font-size: 0.7rem;
-        gap: 3px;
-    }
-
-    .btn-prayer-header span {
-        display: inline;
-    }
-
-    .btn-prayer-header i {
-        font-size: 1rem;
     }
 
     main {
@@ -556,18 +575,28 @@ footer {
         padding: 1.5rem;
     }
 
-    .field-container input {
-        padding: 0.7rem 0.8rem;
-        font-size: 0.85rem;
+    .field-value {
+        padding: 0.75rem 0.9rem;
+        font-size: 0.9rem;
     }
 
     .btn-copy {
         padding: 0.7rem 0.8rem;
-        font-size: 0.7rem;
-        gap: 3px;
-        white-space: nowrap;
-        flex-shrink: 0;
-        min-width: 70px;
+        font-size: 0.8rem;
+    }
+
+    .friday-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .friday-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .friday-footer .btn-accent-outline {
+        min-width: 200px;
+        width: auto;
     }
 
     .grid-buttons {
@@ -587,15 +616,6 @@ footer {
         font-size: 1.1rem;
     }
 
-    .nav-list {
-        gap: 1.2rem;
-        font-size: 1.3rem;
-    }
-
-    .nav-list i {
-        font-size: 1.5rem;
-    }
-
     .contact-icon-circle {
         width: 35px;
         height: 35px;
@@ -605,14 +625,9 @@ footer {
         font-size: 1rem;
     }
 
-    .contact-value-row span {
-        font-size: 1rem;
-    }
-
-    .contact-value-row {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+    .contact-link {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.95rem;
     }
 
     footer {
@@ -627,22 +642,11 @@ footer {
         height: 45px;
         font-size: 1.3rem;
     }
-
-    #toast {
-        min-width: 200px;
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
 }
 
 @media (max-width: 480px) {
     .brand {
         font-size: 0.75rem;
-    }
-
-    .btn-prayer-header {
-        padding: 0.35rem 0.5rem;
-        font-size: 0.65rem;
     }
 
     h2 {
@@ -653,19 +657,22 @@ footer {
         padding: 1.2rem;
     }
 
-    .btn-copy {
-        padding: 0.7rem;
-        font-size: 0;
-        min-width: auto;
-    }
-
-    .btn-copy i {
-        font-size: 1rem;
-    }
-
-    .field-container input {
-        padding: 0.8rem 0.7rem;
+    .field-value {
+        padding: 0.7rem 0.75rem;
         font-size: 0.85rem;
+    }
+
+    .btn-copy {
+        padding: 0.65rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .friday-header {
+        align-items: flex-start;
+    }
+
+    .friday-footer {
+        justify-content: center;
     }
 
     .btn-download-rib {
@@ -679,12 +686,7 @@ footer {
         gap: 0.4rem;
     }
 
-    .contact-value-row span {
-        font-size: 0.85rem;
-    }
-
-    .nav-list {
-        gap: 1rem;
-        font-size: 1.2rem;
+    .contact-link {
+        font-size: 0.9rem;
     }
 }

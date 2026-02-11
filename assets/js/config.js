@@ -5,7 +5,11 @@ const config = {
     },
     horaires: {
         lien: "https://mawaqit.net/fr",
-        texte: "Horaires de Prière"
+        texte: "Horaires de Prière",
+        vendredi: {
+            ete: "14:30",
+            hiver: "13:30"
+        }
     },
     banque: {
         titulaire: "ASSOCIATION GRANDE MOSQUEE DE PARIS",

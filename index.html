@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portail de Don - Grande Mosquée</title>
+    <!-- SEO TODO: compléter title/description, balises og/twitter, données structurées JSON-LD organisation/lieu, et balise canonical -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -16,9 +17,6 @@
         <div class="brand" id="brand-name">Nom Mosquée</div>
 
         <div class="header-actions">
-            <a href="#" id="btn-prayer-top" target="_blank" class="btn-prayer-header">
-                <i class="ri-moon-fill"></i> <span id="lbl-prayer">Horaires</span>
-            </a>
             <button class="burger-btn" onclick="toggleMenu()">
                 <i class="ri-menu-line"></i>
             </button>
@@ -34,8 +32,8 @@
         <div class="nav-content">
             <ul class="nav-list">
                 <li><a href="#don" onclick="toggleMenu()"><i class="ri-bank-card-line"></i> Faire un Don</a></li>
+                <li><a href="#horaires-vendredi" onclick="toggleMenu()"><i class="ri-time-line"></i> Horaires de Prière</a></li>
                 <li><a href="#contact" onclick="toggleMenu()"><i class="ri-map-pin-line"></i> Nous trouver</a></li>
-                <li><a href="#" id="menu-prayer-link" target="_blank"><i class="ri-time-line"></i> Horaires</a></li>
             </ul>
         </div>
     </div>
@@ -43,42 +41,38 @@
     <main>
 
         <section id="don" class="animate-in" style="animation-delay: 0.1s;">
-            <h2>Informations Bancaires</h2>
+            <h2><i class="ri-bank-card-2-line"></i> Informations Bancaires</h2>
 
             <div class="card-panel">
                 <div class="input-group">
                     <span class="label">Bénéficiaire</span>
                     <div class="field-container">
-                        <input type="text" id="val-benef" readonly>
-                        <button class="btn-copy" onclick="copier('val-benef')"><i class="ri-file-copy-line"></i>
-                            COPIER</button>
+                        <div class="field-value" id="val-benef"></div>
+                        <button class="btn-copy" onclick="copierValeur('val-benef')"><i class="ri-file-copy-line"></i> Copier</button>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="label">IBAN</span>
                     <div class="field-container">
-                        <input type="text" id="val-iban" readonly>
-                        <button class="btn-copy" onclick="copier('val-iban')"><i class="ri-file-copy-line"></i>
-                            COPIER</button>
+                        <div class="field-value" id="val-iban"></div>
+                        <button class="btn-copy" onclick="copierValeur('val-iban')"><i class="ri-file-copy-line"></i> Copier</button>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="label">BIC (Swift)</span>
                     <div class="field-container">
-                        <input type="text" id="val-bic" readonly>
-                        <button class="btn-copy" onclick="copier('val-bic')"><i class="ri-file-copy-line"></i>
-                            COPIER</button>
+                        <div class="field-value" id="val-bic"></div>
+                        <button class="btn-copy" onclick="copierValeur('val-bic')"><i class="ri-file-copy-line"></i> Copier</button>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="label">Référence</span>
                     <div class="field-container">
-                        <input type="text" id="val-ref" readonly>
-                        <button class="btn-copy" onclick="copier('val-ref')"><i class="ri-file-copy-line"></i>
-                            COPIER</button>
+                        <div class="field-value" id="val-ref"></div>
+                        <button class="btn-copy" onclick="copierValeur('val-ref')"><i class="ri-file-copy-line"></i> Copier</button>
                     </div>
                 </div>
 
@@ -97,6 +91,32 @@
             </div>
         </section>
 
+        <section id="horaires-vendredi" class="card-panel prayer-card animate-in" style="animation-delay: 0.2s;">
+            <h2><i class="ri-time-line"></i> Horaires de Prière</h2>
+            <div class="friday-header">
+                <div class="friday-label">Vendredi</div>
+            </div>
+            <div class="friday-grid">
+                <div class="friday-slot">
+                    <div class="friday-icon sun"><i class="ri-sun-line"></i></div>
+                    <div>
+                        <div class="slot-label">Heure d'été</div>
+                        <div class="slot-time" id="heure-ete">--:--</div>
+                    </div>
+                </div>
+                <div class="friday-slot">
+                    <div class="friday-icon winter"><i class="ri-snowy-line"></i></div>
+                    <div>
+                        <div class="slot-label">Heure d'hiver</div>
+                        <div class="slot-time" id="heure-hiver">--:--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="friday-footer">
+                <a id="link-mawaqit" class="btn-accent-outline" target="_blank"><i class="ri-external-link-line"></i> Horaires complets (Mawaqit)</a>
+            </div>
+        </section>
+
         <section id="contact" class="animate-in" style="animation-delay: 0.5s;">
             <h2>Contact & Accès</h2>
 
@@ -104,27 +124,24 @@
                 <ul class="contact-list">
                     <li>
                         <div class="contact-icon-circle"><i class="ri-map-pin-fill"></i></div>
-                        <div class="contact-value-row">
+                        <a id="link-adresse" class="contact-link" target="_blank">
                             <span id="txt-adresse">Adresse...</span>
-                            <button class="btn-copy-small" onclick="copierTexte('txt-adresse')"><i
-                                    class="ri-file-copy-line"></i></button>
-                        </div>
+                            <i class="ri-external-link-line"></i>
+                        </a>
                     </li>
                     <li>
                         <div class="contact-icon-circle"><i class="ri-phone-fill"></i></div>
-                        <div class="contact-value-row">
+                        <a id="link-tel" class="contact-link">
                             <span id="txt-tel">01...</span>
-                            <button class="btn-copy-small" onclick="copierTexte('txt-tel')"><i
-                                    class="ri-file-copy-line"></i></button>
-                        </div>
+                            <i class="ri-phone-line"></i>
+                        </a>
                     </li>
                     <li>
                         <div class="contact-icon-circle"><i class="ri-mail-send-fill"></i></div>
-                        <div class="contact-value-row">
+                        <a id="link-email" class="contact-link">
                             <span id="txt-email">mail@...</span>
-                            <button class="btn-copy-small" onclick="copierTexte('txt-email')"><i
-                                    class="ri-file-copy-line"></i></button>
-                        </div>
+                            <i class="ri-send-plane-line"></i>
+                        </a>
                     </li>
                 </ul>
 
@@ -145,7 +162,7 @@
         <i class="ri-arrow-up-line"></i>
     </button>
 
-    <div id="toast"><i class="ri-checkbox-circle-fill"></i> <span>Copié avec succès !</span></div>
+    <div id="toast"><i class="ri-checkbox-circle-fill"></i><span id="toast-text">Copié</span></div>
 
     <!-- Scripts -->
     <script src="assets/js/config.js"></script>
