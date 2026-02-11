@@ -15,6 +15,9 @@
     --radius-btn: 50px;
     --font-main: 'Segoe UI', Helvetica, Arial, sans-serif;
     --font-mono: 'Roboto Mono', monospace;
+    --input-height: 3.5rem;
+    --input-font-size: 0.82rem;
+    --input-x-pad: 0.65rem;
 }
 
 /* RESET & BASE */
@@ -243,6 +246,7 @@ h2 i {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.5px;
+    padding-left: var(--input-x-pad);
 }
 
 .field-container {
@@ -253,6 +257,7 @@ h2 i {
     overflow: hidden;
     background: #f9fafb;
     transition: 0.2s;
+    min-height: var(--input-height);
 }
 
 .field-container:focus-within {
@@ -263,10 +268,10 @@ h2 i {
 
 .field-value {
     width: 100%;
-    padding: 0.65rem 0.95rem;
-    min-height: 2.6rem;
+    padding: 0.65rem var(--input-x-pad);
+    min-height: var(--input-height);
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: var(--input-font-size);
     color: var(--text-main);
     font-weight: 600;
     line-height: 1.25;
@@ -280,14 +285,16 @@ h2 i {
     background: #f3f4f6;
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: var(--input-font-size);
     border-left: 1px solid var(--border-color);
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 90px;
-    min-height: 2.6rem;
+    min-height: var(--input-height);
+    height: 100%;
+    align-self: stretch;
     gap: 6px;
     white-space: nowrap;
 }
