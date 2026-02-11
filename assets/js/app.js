@@ -87,7 +87,8 @@ function copierValeur(id) {
 
     navigator.clipboard.writeText(text)
         .then(() => showToast('Copié'))
-        .catch(() => showToast('Copié'));
+    .catch(() => showToast('Copié'))
+    .finally(() => clearFocus());
 }
 
 // Scroll Top Button
@@ -113,6 +114,21 @@ function showToast(message = 'Copié') {
     text.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+// Supprime le focus persistant (notamment sur iOS après un clic)
+function clearFocus() {
+    const active = document.activeElement;
+    if (active && typeof active.blur === 'function') {
+        active.blur();
+    }
+
+    if (window.getSelection) {
+        const selection = window.getSelection();
+        if (selection && !selection.isCollapsed) {
+            selection.removeAllRanges();
+        }
+    }
 }
 
 // Accessibilité overlay (Esc pour fermer)
