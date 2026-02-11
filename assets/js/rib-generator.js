@@ -99,12 +99,40 @@ function genererRIB() {
 function telechargerRIB() {
     try {
         const doc = genererRIB();
-        doc.save(`RIB-${config.general.nomMosquee.replace(/\s+/g, '-')}-${config.general.annee}.pdf`);
-        if (typeof showToast === 'function') {
-            showToast('RIB téléchargé');
+        const filename = `RIB-${config.general.nomMosquee.replace(/\s+/g, '-')}-${config.general.annee}.pdf`;
+
+        // Utilise la sauvegarde native de jsPDF quand elle est disponible
+        const saveResult = doc.save(filename, { returnPromise: true });
+        if (saveResult && typeof saveResult.then === 'function') {
+            saveResult.then(() => {
+                if (typeof showToast === 'function') showToast('RIB téléchargé');
+            }).catch((error) => {
+                console.warn('Sauvegarde PDF native indisponible, fallback utilisé:', error);
+                telechargerRIBFallback(doc, filename);
+            });
+            return;
         }
+
+        // Fallback manuel si la méthode native échoue (notamment sur certains navigateurs mobiles)
+        telechargerRIBFallback(doc, filename);
     } catch (error) {
         console.error('Erreur génération PDF:', error);
         alert('Erreur lors de la génération du RIB. Veuillez réessayer.');
+    }
+}
+
+// Fallback de téléchargement via blob pour maximiser la compatibilité
+function telechargerRIBFallback(doc, filename) {
+    const blob = doc.output('blob');
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    if (typeof showToast === 'function') {
+        showToast('RIB téléchargé');
     }
 }
