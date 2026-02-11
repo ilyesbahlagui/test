@@ -14,7 +14,7 @@ const config = {
         iban: "FR76 3000 2000 5000 1234 5678 901",
         bic: "BNPAFRPP",
         ref: "DON-NIMES-2026",
-        ribPdf: "assets/docs/rib.pdf" // Chemin du PDF RIB fourni manuellement
+        ribPdf: "assets/docs/rib.pdf"
     },
     liens: {
         cb: "https://stripe.com/donate/nimes",
