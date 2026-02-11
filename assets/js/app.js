@@ -47,9 +47,17 @@ function initData() {
     const telLink = document.getElementById('link-tel');
     const emailLink = document.getElementById('link-email');
 
-    adresseLink.href = `https://maps.google.com/?q=${encodeURIComponent(adresse)}`;
-    telLink.href = `tel:${tel.replace(/\s+/g, '')}`;
-    emailLink.href = `mailto:${email}`;
+    if (adresseLink) {
+        adresseLink.href = buildNativeMapLink(adresse);
+        adresseLink.removeAttribute('target');
+        adresseLink.rel = 'noreferrer';
+    }
+    if (telLink) {
+        telLink.href = `tel:${tel.replace(/\s+/g, '')}`;
+    }
+    if (emailLink) {
+        emailLink.href = `mailto:${email}`;
+    }
 
     // Horaires vendredi
     document.getElementById('heure-ete').textContent = config.horaires.vendredi.ete;
@@ -92,10 +100,11 @@ function copierValeur(id) {
     const text = el.textContent.trim();
     if (!text) return;
 
+    const trigger = document.activeElement;
     navigator.clipboard.writeText(text)
         .then(() => showToast('Copié'))
     .catch(() => showToast('Copié'))
-    .finally(() => clearFocus());
+    .finally(() => clearFocus(trigger));
 }
 
 // Scroll Top Button
@@ -124,18 +133,28 @@ function showToast(message = 'Copié') {
 }
 
 // Supprime le focus persistant (notamment sur iOS après un clic)
-function clearFocus() {
-    const active = document.activeElement;
-    if (active && typeof active.blur === 'function') {
-        active.blur();
-    }
+function clearFocus(triggerEl = null) {
+    const blurTarget = triggerEl && typeof triggerEl.blur === 'function'
+        ? triggerEl
+        : (document.activeElement && typeof document.activeElement.blur === 'function'
+            ? document.activeElement
+            : null);
 
-    if (window.getSelection) {
-        const selection = window.getSelection();
-        if (selection && !selection.isCollapsed) {
-            selection.removeAllRanges();
+    // iOS garde parfois le focus en surbrillance : on floute après le cycle courant
+    setTimeout(() => {
+        if (blurTarget) {
+            blurTarget.blur();
         }
-    }
+        if (document.activeElement && typeof document.activeElement.blur === 'function') {
+            document.activeElement.blur();
+        }
+        if (window.getSelection) {
+            const selection = window.getSelection();
+            if (selection && !selection.isCollapsed) {
+                selection.removeAllRanges();
+            }
+        }
+    }, 10);
 }
 
 // Accessibilité overlay (Esc pour fermer)
@@ -178,4 +197,20 @@ function telechargerRIB() {
         console.error('Erreur téléchargement RIB:', error);
         alert('Erreur lors du téléchargement du RIB. Veuillez réessayer.');
     }
+}
+
+// Prépare un lien d'adresse qui laisse le smartphone choisir l'appli de cartes
+function buildNativeMapLink(adresse) {
+    const encoded = encodeURIComponent(adresse);
+    const ua = navigator.userAgent || '';
+    const isIOS = /iP(hone|ad|od)/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+
+    if (isIOS) {
+        return `https://maps.apple.com/?q=${encoded}`;
+    }
+    if (isAndroid) {
+        return `geo:0,0?q=${encoded}`;
+    }
+    return `https://www.openstreetmap.org/search?query=${encoded}`;
 }
