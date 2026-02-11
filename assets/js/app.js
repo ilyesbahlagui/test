@@ -15,7 +15,14 @@ function initData() {
     document.getElementById('footer-brand').textContent = nom;
     document.title = `${nom} - Dons`;
     const currentYear = new Date().getFullYear();
-    document.getElementById('footer-copy').textContent = `© ${currentYear} ${nom}. Tous droits réservés.`;
+    const footerYear = document.getElementById('footer-year');
+    if (footerYear) {
+        footerYear.textContent = currentYear;
+    }
+    const footerCopy = document.getElementById('footer-copy');
+    if (footerCopy && !footerYear) {
+        footerCopy.textContent = `© ${currentYear} Tous droits réservés.`;
+    }
 
     // Banque
     document.getElementById('val-benef').textContent = config.banque.titulaire;

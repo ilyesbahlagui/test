@@ -1,7 +1,6 @@
 const config = {
     general: {
-        nomMosquee: "Mosquée de Nîmes",
-        annee: "2026"
+        nomMosquee: "Mosquée de Nîmes"
     },
     horaires: {
         lien: "https://mawaqit.net/fr/nimes",
@@ -15,7 +14,6 @@ const config = {
         iban: "FR76 3000 2000 5000 1234 5678 901",
         bic: "BNPAFRPP",
         ref: "DON-NIMES-2026",
-        domiciliation: "BNP PARIBAS - NIMES",
         ribPdf: "assets/docs/rib.pdf" // Chemin du PDF RIB fourni manuellement
     },
     liens: {
